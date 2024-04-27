@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="section-header">
+<h1>Documentssssss</h1>
+
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active">Dashboard</div>
+      </div>
+    </div>
+
+<div id="documents">
+  <% @documents.each do |document| %>
+    <%= render document %>
+    <p>
+      <%= link_to "Show this document", document %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New document", new_document_path %>
