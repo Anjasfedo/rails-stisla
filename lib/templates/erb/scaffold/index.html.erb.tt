@@ -52,6 +52,7 @@
                   <%= attribute.human_name %>
                   </th>
                   <% end -%>
+                  <th class="p-0 text-center">Action</th>
                 </tr>
                 <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
                   <%%= render <%= singular_table_name %> %>
