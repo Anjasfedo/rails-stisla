@@ -1,17 +1,17 @@
-<%% content_for :title, "Edit <%= human_name.downcase %>" %>
+<%% content_for :title, "Edit <%= human_name %>" %>
 
 <div class="section-header">
-  <%% # Page Title %>
-  <h1>Edit <%= human_name.downcase %></h1>
+  <%%# Page Title %>
+  <h1>Edit <%= human_name %></h1>
   <%# Page Breadcrumb %>
   <div class="section-header-breadcrumb">
     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
     <div class="breadcrumb-item"><a href="#">Components</a></div>
-    <div class="breadcrumb-item">Edit <%= human_name.downcase %></div>
+    <div class="breadcrumb-item">Edit <%= human_name %></div>
   </div>
 </div>
 <div class="section-body">
-  <h2 class="section-title">Edit <%= human_name.downcase %> Form </h2>
+  <h2 class="section-title">Edit <%= human_name %> Form </h2>
   <p class="section-lead">
     Form validation using default from Bootstrap 4
   </p>
@@ -22,5 +22,5 @@
       </div>
     </div>
   </div>
-  <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path), class: "btn btn-danger" %>
+  <%%= link_to "Back to <%= human_name.pluralize %>", <%= index_helper(type: :path) %>, class: "btn btn-outline-warning" %>
 </div>

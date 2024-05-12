@@ -1,9 +1,9 @@
 <%% content_for :title, "Index <%= human_name.downcase %>" %>
 
 <div class="section-header">
-  <%% # Page Title %>
+  <%%# Page Title %>
   <h1>Index <%= human_name.pluralize %></h1>
-  <%% # Page Breadcrumb %>
+  <%%# Page Breadcrumb %>
   <div class="section-header-breadcrumb">
     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
     <div class="breadcrumb-item"><a href="#">Components</a></div>
@@ -11,26 +11,6 @@
   </div>
 </div>
 <div class="section-body">
-  <%% # Alert Success %>
-  <%% if notice.present? %>
-    <div id="alert" class="alert alert-success alert-dismissible show fade" style="transition: opacity 1s ease-in-out; opacity: 1;">
-      <div class="alert-body">
-        <button id="closeButton" class="close" data-dismiss="alert">
-          <span>×</span>
-        </button>
-        <%%= notice %>
-      </div>
-    </div>
-    <script>
-      setTimeout(function() {
-        var alertDiv = document.getElementById('alert');
-        alertDiv.style.opacity = '0';
-        setTimeout(function() {
-          alertDiv.remove();
-        }, 500); // 1 second after the fade-out animation ends
-      }, 1000); // 2 seconds delay before starting the fade-out animation
-    </script>
-  <%% end %>
   <h2 class="section-title"><%= human_name.pluralize %></h2>
   <p class="section-lead">Example of some Bootstrap table components.</p>
   <div class="row">
@@ -51,9 +31,9 @@
                 <tr>
                 <% attributes.reject(&:password_digest?).each do |attribute| -%>
                   <th class="p-0 text-center">
-                  <%= attribute.human_name %>
+                    <%= attribute.human_name %>
                   </th>
-                  <% end -%>
+                <% end -%>
                   <th class="p-0 text-center">Action</th>
                 </tr>
                 <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
