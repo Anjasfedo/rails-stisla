@@ -2,8 +2,8 @@
 
 one:
   title: MyString
-  stock: 1
+  content: MyString
 
 two:
   title: MyString
-  stock: 1
+  content: MyString
