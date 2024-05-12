@@ -47,12 +47,13 @@
             <table class="table table-striped table-bordered">
               <tbody>
                 <tr>
-                  <th>
+                                  <th class="p-0 text-center">
+                  Title
                   </th>
-                  <th>Content</th>
-                  <th>Title</th>
-                  <th>Action</th>
-                </tr>
+                                    <th class="p-0 text-center">
+                  Content
+                  </th>
+                                  </tr>
                 <% @tasks.each do |task| %>
                   <%= render task %>
                 <% end %>

@@ -47,11 +47,11 @@
             <table class="table table-striped table-bordered">
               <tbody>
                 <tr>
-                  <th>
+                <% attributes.reject(&:password_digest?).each do |attribute| -%>
+                  <th class="p-0 text-center">
+                  <%= attribute.human_name %>
                   </th>
-                  <th>Content</th>
-                  <th>Title</th>
-                  <th>Action</th>
+                  <% end -%>
                 </tr>
                 <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
                   <%%= render <%= singular_table_name %> %>
