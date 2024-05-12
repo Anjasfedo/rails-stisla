@@ -1,11 +1,13 @@
+<%% content_for :title, "Index <%= human_name.downcase %>" %>
+
 <div class="section-header">
   <%% # Page Title %>
-  <h1>Index Documents</h1>
+  <h1>Index <%= human_name.pluralize %></h1>
   <%% # Page Breadcrumb %>
   <div class="section-header-breadcrumb">
     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
     <div class="breadcrumb-item"><a href="#">Components</a></div>
-    <div class="breadcrumb-item">Index Documents</div>
+    <div class="breadcrumb-item">Index <%= human_name.pluralize %></div>
   </div>
 </div>
 <div class="section-body">
@@ -29,13 +31,13 @@
       }, 1000); // 2 seconds delay before starting the fade-out animation
     </script>
   <%% end %>
-  <h2 class="section-title">Documents</h2>
+  <h2 class="section-title"><%= human_name.pluralize %></h2>
   <p class="section-lead">Example of some Bootstrap table components.</p>
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Documents Table</h4>
+          <h4><%= human_name.pluralize %> Table</h4>
           <div class="card-header-form">
             <div class="input-group">
               <%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %> , class: "btn btn-primary" %>

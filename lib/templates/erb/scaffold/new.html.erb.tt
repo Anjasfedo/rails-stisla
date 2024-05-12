@@ -1,11 +1,26 @@
 <%% content_for :title, "New <%= human_name.downcase %>" %>
 
-<h1>New <%= human_name.downcase %></h1>
-
-<%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
-
-<br>
-
-<div>
-  <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %> %>
+<div class="section-header">
+  <%% # Page Title %>
+  <h1>New <%= human_name.downcase %></h1>
+  <%% # Page Breadcrumb %>
+  <div class="section-header-breadcrumb">
+    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+    <div class="breadcrumb-item"><a href="#">Components</a></div>
+    <div class="breadcrumb-item">New <%= human_name.downcase %></div>
+  </div>
+</div>
+<div class="section-body">
+  <h2 class="section-title">New <%= human_name.downcase %> Form </h2>
+  <p class="section-lead">
+    Form validation using default from Bootstrap 4
+  </p>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>
+      </div>
+    </div>
+  </div>
+    <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %>, class: "btn btn-danger" %>
 </div>

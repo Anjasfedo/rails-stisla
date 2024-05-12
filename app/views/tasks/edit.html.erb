@@ -1,12 +1,26 @@
-<% content_for :title, "Editing task" %>
+<% content_for :title, "Edit task" %>
 
-<h1>Editing task</h1>
-
-<%= render "form", task: @task %>
-
-<br>
-
-<div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
+<div class="section-header">
+  <% # Page Title %>
+  <h1>Edit task</h1>
+  
+  <div class="section-header-breadcrumb">
+    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+    <div class="breadcrumb-item"><a href="#">Components</a></div>
+    <div class="breadcrumb-item">Edit task</div>
+  </div>
+</div>
+<div class="section-body">
+  <h2 class="section-title">Edit task Form </h2>
+  <p class="section-lead">
+    Form validation using default from Bootstrap 4
+  </p>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <%= render "form", task: @task %>
+      </div>
+    </div>
+  </div>
+  <%= link_to "Back to tasks", documents_path, class: "btn btn-danger" %>
 </div>
