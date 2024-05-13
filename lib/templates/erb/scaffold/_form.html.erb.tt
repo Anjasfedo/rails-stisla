@@ -22,18 +22,15 @@
               <%%= <%= model_resource_name %>.errors.full_messages_for(:password_confirmation).join(', ') %>
             </div>
           <%% end %>
-        <% elsif attribute.attachments? or attribute.type == :attachment %>
+        <% elsif attribute.attachments? %>
           <%%= form.label :<%= attribute.column_name %> %>
-            <div class="custom-file">
-              <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "custom-file-input #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}"  %>
-              <%%= form.label :<%= attribute.column_name %>, class: "custom-file-label" %>
-            </div>
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}"  %>
           <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
             <div class="text-danger">
               <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
             </div>
           <%% end %>
-        <% elsif attribute.type == :boolean? %>
+        <% elsif attribute.type == :boolean %>
           <%%= form.label :<%= attribute.column_name %> %>
           <div class="form-check">
             <%%= form.check_box :<%= attribute.column_name %>, class: "form-check-input #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}" %>
