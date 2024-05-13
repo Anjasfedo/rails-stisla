@@ -3,45 +3,58 @@
     <h4>Makanan Form</h4>
   </div>
   <div class="card-body">
-    <div class="form-group">
-      <%= form.label :name %>
-      <%= form.text_field :name, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:name)}" %>
-      <% if makanan.errors.has_key?(:name) %>
-        <div class="text-danger">
-          <%= makanan.errors.full_messages_for(:name).join(', ') %>
-        </div>
-      <% end %>
-    </div>
-    <div class="form-group">
-      <%= form.label :halal %>
-      <div class="form-check">
-        <%= form.check_box :halal, class: "form-check-input #{'is-invalid' if makanan.errors.has_key?(:halal)}" %>
-        <%= form.label :halal, class: "form-check-label" %>
-        <% if makanan.errors.has_key?(:halal) %>
-          <div class="text-danger">
-            <%= makanan.errors.full_messages_for(:halal).join(', ') %>
-          </div>
-        <% end %>
+    
+      <div class="form-group">
+        
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:name)}" %>
+          <% if makanan.errors.has_key?(:name) %>
+            <div class="text-danger">
+              <%= makanan.errors.full_messages_for(:name).join(', ') %>
+            </div>
+          <% end %>
+        
       </div>
-    </div>
-    <div class="form-group">
-      <%= form.label :price %>
-      <%= form.number_field :price, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:price)}" %>
-      <% if makanan.errors.has_key?(:price) %>
-        <div class="text-danger">
-          <%= makanan.errors.full_messages_for(:price).join(', ') %>
-        </div>
-      <% end %>
-    </div>
-    <div class="form-group">
-      <%= form.label :image %>
-      <%= form.file_field :image, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:image)}" %>
-      <% if makanan.errors.has_key?(:image) %>
-        <div class="text-danger">
-          <%= makanan.errors.full_messages_for(:image).join(', ') %>
-        </div>
-      <% end %>
-    </div>
+    
+      <div class="form-group">
+        
+          <%= form.label :halal %>
+          <div class="form-check">
+            <%= form.check_box :halal, class: "form-check-input #{'is-invalid' if makanan.errors.has_key?(:halal)}" %>
+            <%= form.label :halal, class: "form-check-label" %>
+            <% if makanan.errors.has_key?(:halal) %>
+              <div class="text-danger">
+                <%= makanan.errors.full_messages_for(:halal).join(', ') %>
+              </div>
+            <% end %>
+          </div>
+        
+      </div>
+    
+      <div class="form-group">
+        
+          <%= form.label :price %>
+          <%= form.number_field :price, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:price)}" %>
+          <% if makanan.errors.has_key?(:price) %>
+            <div class="text-danger">
+              <%= makanan.errors.full_messages_for(:price).join(', ') %>
+            </div>
+          <% end %>
+        
+      </div>
+    
+      <div class="form-group">
+        
+          <%= form.label :image %>
+          <%= form.file_field :image, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:image)}" %>
+          <% if makanan.errors.has_key?(:image) %>
+            <div class="text-danger">
+              <%= makanan.errors.full_messages_for(:image).join(', ') %>
+            </div>
+          <% end %>
+        
+      </div>
+    
   </div>
   <div class="card-footer text-right">
     <%= form.submit "Save", class: "btn btn-primary" %>

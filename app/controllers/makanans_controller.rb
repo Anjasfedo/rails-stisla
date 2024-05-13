@@ -1,12 +1,12 @@
 class MakanansController < ApplicationController
   before_action :set_makanan, only: %i[ show edit update destroy ]
 
-  # GET /makanans or /makanans.json
+  # GET /makanans
   def index
     @makanans = Makanan.all
   end
 
-  # GET /makanans/1 or /makanans/1.json
+  # GET /makanans/1
   def show
   end
 
@@ -19,42 +19,30 @@ class MakanansController < ApplicationController
   def edit
   end
 
-  # POST /makanans or /makanans.json
+  # POST /makanans
   def create
     @makanan = Makanan.new(makanan_params)
 
-    respond_to do |format|
-      if @makanan.save
-        format.html { redirect_to makanan_url(@makanan), notice: "Makanan was successfully created." }
-        format.json { render :show, status: :created, location: @makanan }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @makanan.errors, status: :unprocessable_entity }
-      end
+    if @makanan.save
+      redirect_to makanans_url, notice: "Makanan was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /makanans/1 or /makanans/1.json
+  # PATCH/PUT /makanans/1
   def update
-    respond_to do |format|
-      if @makanan.update(makanan_params)
-        format.html { redirect_to makanan_url(@makanan), notice: "Makanan was successfully updated." }
-        format.json { render :show, status: :ok, location: @makanan }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @makanan.errors, status: :unprocessable_entity }
-      end
+    if @makanan.update(makanan_params)
+      redirect_to makanans_url, notice: "Makanan was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /makanans/1 or /makanans/1.json
+  # DELETE /makanans/1
   def destroy
     @makanan.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to makanans_url, notice: "Makanan was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to makanans_url, notice: "Makanan was successfully destroyed.", status: :see_other
   end
 
   private
