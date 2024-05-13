@@ -22,7 +22,7 @@
               <%%= <%= model_resource_name %>.errors.full_messages_for(:password_confirmation).join(', ') %>
             </div>
           <%% end %>
-        <% elsif attribute.attachments? or attribute.type == :attachment? %>
+        <% elsif attribute.attachments? or attribute.type == :attachment %>
           <%%= form.label :<%= attribute.column_name %> %>
             <div class="custom-file">
               <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "custom-file-input #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}"  %>

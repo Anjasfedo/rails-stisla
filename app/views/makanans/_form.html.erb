@@ -31,8 +31,11 @@
       <% end %>
     </div>
     <div class="form-group">
-      <%= form.label :image %>
-      <%= form.file_field :image, class: "form-control #{'is-invalid' if makanan.errors.has_key?(:image)}" %>
+      <label for="">image</label>
+      <div class="custom-file">
+        <%= form.file_field :image, multiple: true, class: "custom-file-input #{'is-invalid' if makanan.errors.has_key?(:image)}"  %>
+        <%= form.label :image, class: "custom-file-label" %>
+      </div>
       <% if makanan.errors.has_key?(:image) %>
         <div class="text-danger">
           <%= makanan.errors.full_messages_for(:image).join(', ') %>
