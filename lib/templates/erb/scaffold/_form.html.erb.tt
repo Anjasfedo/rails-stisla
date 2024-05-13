@@ -3,44 +3,58 @@
     <h4><%= human_name %> Form</h4>
   </div>
   <div class="card-body">
-  <% attributes.each do |attribute| -%>
-    <div class="form-group">
-  <% if attribute.password_digest? -%>
-    <%%= form.label :password %>
-    <%%= form.password_field :password, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:title)}" %>
-      <%% if <%= model_resource_name %>.errors.has_key?(:password) %>
-        <div class="text-danger">
-          <%%= <%= model_resource_name %>.errors.full_messages_for(:password).join(', ') %>
+    <% attributes.each do |attribute| %>
+      <div class="form-group">
+        <% if attribute.password_digest? %>
+          <%%= form.label :password %>
+          <%%= form.password_field :password, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:password)}" %>
+          <%% if <%= model_resource_name %>.errors.has_key?(:password) %>
+            <div class="text-danger">
+              <%%= <%= model_resource_name %>.errors.full_messages_for(:password).join(', ') %>
+            </div>
+          <%% end %>
         </div>
-      <%% end %>
-  </div>
-  <div class="form-group">
-    <%%= form.label :password_confirmation %>
-    <%%= form.password_field :password_confirmation, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:title)}" %>
-      <%% if <%= model_resource_name %>.errors.has_key?(:password_confirmation) %>
-        <div class="text-danger">
-          <%%= <%= model_resource_name %>.errors.full_messages_for(:password_confirmation).join(', ') %>
-        </div>
-      <%% end %>
-  <% elsif attribute.attachments? -%>
-    <%%= form.label :<%= attribute.column_name %> %>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:title)}"  %>
-      <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
-        <div class="text-danger">
-          <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
-        </div>
-      <%% end %>
-  <% else -%>
-    <%%= form.label :<%= attribute.column_name %> %>
-    <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:title)}" %>
-      <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
-        <div class="text-danger">
-          <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
-        </div>
-      <%% end %>
-  <% end -%>
-  </div>
-  <% end -%>
+        <div class="form-group">
+          <%%= form.label :password_confirmation %>
+          <%%= form.password_field :password_confirmation, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:password_confirmation)}" %>
+          <%% if <%= model_resource_name %>.errors.has_key?(:password_confirmation) %>
+            <div class="text-danger">
+              <%%= <%= model_resource_name %>.errors.full_messages_for(:password_confirmation).join(', ') %>
+            </div>
+          <%% end %>
+        <% elsif attribute.attachments? or attribute.type == :attachment? %>
+          <%%= form.label :<%= attribute.column_name %> %>
+            <div class="custom-file">
+              <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true, class: "custom-file-input #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}"  %>
+              <%%= form.label :<%= attribute.column_name %>, class: "custom-file-label" %>
+            </div>
+          <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
+            <div class="text-danger">
+              <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
+            </div>
+          <%% end %>
+        <% elsif attribute.type == :boolean? %>
+          <%%= form.label :<%= attribute.column_name %> %>
+          <div class="form-check">
+            <%%= form.check_box :<%= attribute.column_name %>, class: "form-check-input #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}" %>
+            <%%= form.label :<%= attribute.column_name %>, class: "form-check-label" %>
+            <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
+              <div class="text-danger">
+                <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
+              </div>
+            <%% end %>
+          </div>
+        <% else %>
+          <%%= form.label :<%= attribute.column_name %> %>
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control #{'is-invalid' if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>)}" %>
+          <%% if <%= model_resource_name %>.errors.has_key?(:<%= attribute.column_name %>) %>
+            <div class="text-danger">
+              <%%= <%= model_resource_name %>.errors.full_messages_for(:<%= attribute.column_name %>).join(', ') %>
+            </div>
+          <%% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="card-footer text-right">
     <%%= form.submit "Save", class: "btn btn-primary" %>
