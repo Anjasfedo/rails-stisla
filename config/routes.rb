@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "makanans#index"
   devise_for :users
   resources :makanans
   resources :tasks
@@ -10,5 +11,4 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
 end
