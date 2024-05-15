@@ -42,7 +42,10 @@
                 <div class="dropdown-title">Logged in </div>
                 <a href="" class="dropdown-item has-icon"><i class="far fa-user"></i> Profile</a>
                 <div class="dropdown-divider"></div>
-                <button type="submit" class="dropdown-item has-icon text-danger small d-flex align-items-center"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <%= button_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger small d-flex align-items-center' do %>
+                  <i class="fas fa-sign-out-alt"></i>  Logout
+                <% end %>
+                <%# <button type="submit" class="dropdown-item has-icon text-danger small d-flex align-items-center"><i class="fas fa-sign-out-alt"></i> Logout</button> %>
               </div>
             </li>
           </ul>
