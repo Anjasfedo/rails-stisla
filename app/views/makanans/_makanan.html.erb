@@ -1,33 +1,21 @@
 <tr id="<%= dom_id makanan %>">
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= makanan.name %>
   </td>
-
-    
-
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= makanan.halal %>
   </td>
-
-    
-
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= makanan.price %>
   </td>
-
-    
-
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= link_to makanan.image.filename, makanan.image if makanan.image.attached? %>
   </td>
-
-    
-
-<% if params[:action] == 'index' %>
+  <% if params[:action] == 'index' %>
     <td class="p-0 text-center">
       <div class="btn-group-vertical">
         <%= link_to "Show", makanan, class: "btn btn-outline-secondary mb-1" %>
-        <%= link_to "Edit", edit_makanan_url(makanan), class: "btn btn-outline-success mb-1" %> 
+        <%= link_to "Edit", edit_makanan_url(makanan), class: "btn btn-outline-success mb-1" %>
         <%= button_to "Destroy", makanan, method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, class: "btn btn-outline-danger mb-1" %>
       </div>
     </td>
