@@ -23,26 +23,38 @@ class MakanansController < ApplicationController
   def create
     @makanan = Makanan.new(makanan_params)
 
-    if @makanan.save
-      redirect_to makanans_url, notice: "Makanan was successfully created."
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @makanan.save
+          format.html { redirect_to makanans_url, notice: "Makanan was successfully created." }
+          format.json { render :show, status: :created, location: @makanan }
+      else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @makanan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /makanans/1
   def update
-    if @makanan.update(makanan_params)
-      redirect_to makanans_url, notice: "Makanan was successfully updated.", status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @makanan.update(makanan_params)
+          format.html { redirect_to makanans_url, notice: "Makanan was successfully updated." }
+          format.json { render :show, status: :ok, location: @task }
+      else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @makanan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /makanans/1
   def destroy
     @makanan.destroy!
-    redirect_to makanans_url, notice: "Makanan was successfully destroyed.", status: :see_other
+
+    respond_to do |format|
+      format.html { redirect_to makanans_url, notice: "Makanan was successfully destroyed." }
+      format.json { head :no_content }
+    end
   end
 
   private

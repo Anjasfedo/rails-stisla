@@ -20,43 +20,7 @@
   </head>
   <body>
     <div id="app">
-      <% if notice.present?%>
-        <div id="alert" class="alert alert-success alert-dismissible show fade" style="transition: opacity 1s ease-in-out; opacity: 1;">
-          <div class="alert-body">
-            <button id="closeButton" class="close" data-dismiss="alert">
-              <span>×</span>
-            </button>
-            <%= notice %>
-          </div>
-        </div>
-        <script>
-          setTimeout(function() {
-            var alertDiv = document.getElementById('alert');
-            alertDiv.style.opacity = '0';
-            setTimeout(function() {
-              alertDiv.remove();
-            }, 500);
-          }, 1000);
-        </script>
-      <% elsif alert.present? %>
-        <div id="alert" class="alert alert-danger alert-dismissible show fade" style="transition: opacity 1s ease-in-out; opacity: 1;">
-          <div class="alert-body">
-            <button id="closeButton" class="close" data-dismiss="alert">
-              <span>×</span>
-            </button>
-            <%= alert %>
-          </div>
-        </div>
-        <script>
-          setTimeout(function() {
-            var alertDiv = document.getElementById('alert');
-            alertDiv.style.opacity = '0';
-            setTimeout(function() {
-              alertDiv.remove();
-            }, 500);
-          }, 1000);
-        </script>
-      <% end %>
+      <%= render 'shared/alert' %>
       <%= yield %>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

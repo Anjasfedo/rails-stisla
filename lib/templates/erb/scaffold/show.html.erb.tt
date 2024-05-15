@@ -9,26 +9,6 @@
   </div>
 </div>
 <div class="section-body">
-  <%%# Alert Success %>
-  <%% if notice.present? %>
-    <div id="alert" class="alert alert-success alert-dismissible show fade" style="transition: opacity 1s ease-in-out; opacity: 1;">
-      <div class="alert-body">
-        <button id="closeButton" class="close" data-dismiss="alert">
-          <span>×</span>
-        </button>
-        <%%= notice %>
-      </div>
-    </div>
-  <script>
-    setTimeout(function() {
-      var alertDiv = document.getElementById('alert');
-      alertDiv.style.opacity = '0';
-      setTimeout(function() {
-        alertDiv.remove();
-      }, 500); // 1 second after the fade-out animation ends
-    }, 1000); // 2 seconds delay before starting the fade-out animation
-  </script>
-<%% end %>
   <h2 class="section-title"><%= human_name %> Form </h2>
   <p class="section-lead">
     Form validation using default from Bootstrap 4
