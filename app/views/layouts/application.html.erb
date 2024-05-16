@@ -40,7 +40,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Logged in for <%= time_ago_in_words(session[:login_time]) %> </div>
-                <%= link_to edit_user_registration_path, class: 'dropdown-item has-icon' do %>
+                <%= link_to edit_user_registration_path, class: 'dropdown-item has-icon', data: {turbo: false} do %>
                   <i class="far fa-user"></i> Profile
                 <% end %>
                 <div class="dropdown-divider"></div>

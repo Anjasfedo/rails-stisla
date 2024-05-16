@@ -1,17 +1,19 @@
 <ul class="sidebar-menu">
     <li class="menu-header">Dashboard</li>
     <li class="nav-item">
-      <a href="" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+    <%= link_to root_path, class: "nav-link" do %>
+      <i class="fas fa-fire"></i><span>Dashboard</span>
+    <% end %>
     </li>
     <li class="menu-header">Mail</li>
     <li class="nav-item dropdown">
-      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Mail</span></a>
+      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Data</span></a>
       <ul class="dropdown-menu">
         <li>
-          <a class="nav-link" href="">Incoming Mail</a>
+          <%= link_to 'Makanan', makanans_path, class: 'nav-link', data: {turbo: false} %>
         </li>
         <li>
-          <a class="nav-link" href="">Outgoing Mail</a>
+          <%= link_to 'Task', tasks_path, class: 'nav-link', data: {turbo: false} %>
         </li>
       </ul>
     </li>

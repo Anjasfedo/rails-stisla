@@ -19,7 +19,7 @@
   <body>
     <div id="app">
       <%= render 'shared/alert' %>
-      <% if devise_action? %>
+      <% if devise_auth_action? %>
         <!-- Devise login/sign-up layout -->
         <section class="section">
           <div class="d-flex flex-wrap align-items-stretch">
@@ -47,6 +47,64 @@
             </div>
           </div>
         </section>
+      <% elsif devise_update_profile?  %>
+        <div class="main-wrapper">
+          <div class="navbar-bg"></div>
+          <nav class="navbar navbar-expand-lg main-navbar">
+            <div class="form-inline mr-auto">
+              <ul class="navbar-nav mr-3">
+                <li>
+                  <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                </li>
+              </ul>
+            </div>
+            <ul class="navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                  <%= image_tag ('avatar/avatar-1.png'), alt: 'profile',class: "rounded-circle mr-1" %>
+                  <div class="d-sm-none d-lg-inline-block">
+                    <%= current_user.email %>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <div class="dropdown-title">Logged in for <%= time_ago_in_words(session[:login_time]) %> </div>
+                  <%= link_to edit_user_registration_path, class: 'dropdown-item has-icon', data: {turbo: false} do %>
+                    <i class="far fa-user"></i> Profile
+                  <% end %>
+                  <div class="dropdown-divider"></div>
+                  <%= button_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger small d-flex align-items-center', data: {turbo: false} do %>
+                    <i class="fas fa-sign-out-alt"></i>  Logout
+                  <% end %>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="main-sidebar">
+            <aside id="sidebar-wrapper">
+              <div class="sidebar-brand">
+                <a href="#">Mail</a>
+              </div>
+              <div class="sidebar-brand sidebar-brand-sm">
+                <a href="#">M</a>
+              </div>
+              <%= render 'layouts/menu' %>
+            </aside>
+          </div>
+          <!-- Main Content -->
+          <div class="main-content">
+            <section class="section">
+              <%= render 'shared/alert' %>
+              <%= yield %>
+            </section>
+          </div>
+          <footer class="main-footer">
+            <div class="footer-left">
+              Copyright &copy; 2024
+              <div class="bullet"></div>
+              By <a href="https://github.com/Anjasfedo/" target="_blank">Anjasfedo</a>
+            </div>
+          </footer>
+        </div>
       <% else %>
         <!-- Default layout -->
         <%= yield %>
