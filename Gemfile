@@ -74,3 +74,7 @@ gem 'simple_form'
 # gem 'sweet-alert2-rails'
 
 gem 'sass-rails'
+
+gem "chartkick"
+
+gem "groupdate"

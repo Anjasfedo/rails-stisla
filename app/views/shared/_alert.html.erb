@@ -1,20 +1,19 @@
 <% if notice.present? || alert.present? %>
-  <% alert_type = alert.present? ? 'danger' : 'success' %>
-  <div id="alert" class="alert alert-<%= alert_type %> alert-dismissible show fade" style="transition: opacity 1s ease-in-out; opacity: 1;">
-    <div class="alert-body">
-      <button id="closeButton" class="close" data-dismiss="alert">
-        <span>×</span>
-      </button>
-      <%= notice || alert %>
-    </div>
-  </div>
   <script>
-    setTimeout(function() {
-      var alertDiv = document.getElementById('alert');
-      alertDiv.style.opacity = '0';
-      setTimeout(function() {
-        alertDiv.remove();
-      }, 1000);
-    }, 1500);
+    document.addEventListener('DOMContentLoaded', function() {
+      var type = '<%= alert.present? ? 'error' : 'success' %>';
+      var message = '<%= j notice || alert %>';
+
+      var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+      });
+      Toast.fire({
+        icon: type,
+        title: message
+      });
+    });
   </script>
 <% end %>

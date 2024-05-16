@@ -1,0 +1,41 @@
+<% content_for :title, "Dashboard" %>
+<section class="section">
+  <div class="section-header">
+    <h1>Dashboard</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active">Dashboard</div>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <%= render 'card', title: "Lorem", total: 20, icon: "fas fa-inbox", bg: "info" %>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <%= render 'card', title: "Lorem", total: 20, icon: "fas fa-sign-out-alt", bg: "warning" %>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <%= render 'card', title: "Lorem", total: 20, icon: "fas fa-envelope-open-text", bg: "primary" %>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <%= render 'card', title: "Lorem", total: 20, icon: "fas fa-mail-bulk", bg: "success" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+        <div class="card p-3">
+          <div class="card-header">
+            <h4>Statistics</h4>
+            <div class="card-header-action"></div>
+          </div>
+          <div class="card-body">
+            <%= pie_chart Makanan.group(:halal).count, adapter: "google" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+        <%= render 'users' %>
+      </div>
+    </div>
+  </div>
+</section>
