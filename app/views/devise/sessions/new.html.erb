@@ -20,7 +20,7 @@
       <%= render "devise/shared/links", class: "float-left mt-3" %>
     </div>
     <div class="col form-group text-right">
-      <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-icon icon-right", tabindex: "4" %>
+      <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-icon icon-right", tabindex: "4", data: {turbo: false} %>
     </div>
   </div>
 <% end %>

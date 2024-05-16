@@ -33,19 +33,20 @@
           <ul class="navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="" class="rounded-circle mr-1" />
+                <%= image_tag ('avatar/avatar-1.png'), alt: 'profile',class: "rounded-circle mr-1" %>
                 <div class="d-sm-none d-lg-inline-block">
-                  lorem
+                  <%= current_user.email %>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-title">Logged in </div>
-                <a href="" class="dropdown-item has-icon"><i class="far fa-user"></i> Profile</a>
+                <div class="dropdown-title">Logged in for <%= time_ago_in_words(session[:login_time]) %> </div>
+                <%= link_to edit_user_registration_path, class: 'dropdown-item has-icon' do %>
+                  <i class="far fa-user"></i> Profile
+                <% end %>
                 <div class="dropdown-divider"></div>
-                <%= button_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger small d-flex align-items-center' do %>
+                <%= button_to destroy_user_session_path, method: :delete, class: 'dropdown-item has-icon text-danger small d-flex align-items-center', data: {turbo: false} do %>
                   <i class="fas fa-sign-out-alt"></i>  Logout
                 <% end %>
-                <%# <button type="submit" class="dropdown-item has-icon text-danger small d-flex align-items-center"><i class="fas fa-sign-out-alt"></i> Logout</button> %>
               </div>
             </li>
           </ul>
@@ -77,6 +78,7 @@
         </footer>
       </div>
     </div>
+    <%= javascript_include_tag "delete_confirmation_dialog" %>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
