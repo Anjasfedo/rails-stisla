@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+r1 = Role.create({ name: 'Regular', description: 'Can read items' })
+r2 = Role.create({ name: 'Seller', description: 'Can read and create items. Can update and destroy own items' })
+r3 = Role.create({ name: 'Admin', description: 'Can perform any CRUD operation on any resource' })

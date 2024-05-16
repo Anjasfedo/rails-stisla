@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   resources :tasks
   resources :makanans
   root "dashboard#index"

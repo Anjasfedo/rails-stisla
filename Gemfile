@@ -78,3 +78,5 @@ gem 'sass-rails'
 gem "chartkick"
 
 gem "groupdate"
+
+gem 'cancancan'
