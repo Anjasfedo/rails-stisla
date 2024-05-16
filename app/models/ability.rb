@@ -33,7 +33,11 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    else
+    elsif user.seller?
+      can :read, :all
+      can :create, :all
+      # can [:update, :destroy], Item, user_id: user.id
+    elsif user.regular?
       can :read, :all
     end
   end
