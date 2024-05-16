@@ -34,9 +34,14 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.seller?
-      can :read, :all
-      can :create, :all
-      # can [:update, :destroy], Item, user_id: user.id
+      can :read, [Makanan]
+      can :create, [Makanan]
+      can :update, Makanan do |item|
+        item.try(:halal) == false
+      end
+      can :destroy, Makanan do |item|
+        item.try(:halal) == false
+      end
     elsif user.regular?
       can :read, :all
     end

@@ -2,11 +2,15 @@
 <li class="nav-item dropdown <%= 'active' if controller_name == 'makanans' || controller_name == 'tasks' %>">
   <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Data</span></a>
   <ul class="dropdown-menu">
-    <li class="<%= active_class(makanans_path) %>">
-      <%= link_to 'Makanan', makanans_path, class: 'nav-link' %>
-    </li>
-    <li class="<%= active_class(tasks_path) %>">
-      <%= link_to 'Task', tasks_path, class: 'nav-link' %>
-    </li>
+    <% if can?(:read, Makanan) %>
+      <li class="<%= active_class(makanans_path) %>">
+        <%= link_to 'Makanan', makanans_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+    <% if can?(:read, Task) %>
+      <li class="<%= active_class(tasks_path) %>">
+        <%= link_to 'Task', tasks_path, class: 'nav-link' %>
+      </li>
+    <% end %>
   </ul>
 </li>
