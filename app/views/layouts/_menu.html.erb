@@ -1,18 +1,16 @@
-<ul class="sidebar-menu">
-    <li class="menu-header">Dashboard</li>
-    <li class="nav-item">
-      <a href="" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-    </li>
-    <li class="menu-header">Mail</li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Mail</span></a>
-      <ul class="dropdown-menu">
-        <li>
-          <a class="nav-link" href="">Incoming Mail</a>
-        </li>
-        <li>
-          <a class="nav-link" href="">Outgoing Mail</a>
-        </li>
-      </ul>
-    </li>
+<li class="menu-header">Mail</li>
+<li class="nav-item dropdown <%= 'active' if controller_name == 'makanans' || controller_name == 'tasks' %>">
+  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Data</span></a>
+  <ul class="dropdown-menu">
+    <% if can?(:read, Makanan) %>
+      <li class="<%= active_class(makanans_path) %>">
+        <%= link_to 'Makanan', makanans_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+    <% if can?(:read, Task) %>
+      <li class="<%= active_class(tasks_path) %>">
+        <%= link_to 'Task', tasks_path, class: 'nav-link' %>
+      </li>
+    <% end %>
   </ul>
+</li>

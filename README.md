@@ -24,3 +24,8 @@ Things you may want to cover:
 * ...
 
 rails active_storage:install
+
+rails g scaffold user name:string role:belongs_to
+rails g scaffold role name:string description:string
+
+rails g devise User

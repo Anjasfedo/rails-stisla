@@ -1,0 +1,23 @@
+<div class="card w-100">
+  <div class="card-header">
+    <h4>Users</h4>
+  </div>
+  <div class="card-body">
+    <div class="list-group list-group-flush d-flex flex-wrap flex-row flex-lg-column">
+      <% @users.each do |user| %>
+        <div class="list-group-item">
+          <div class="avatar-item d-flex justify-content-center mb-0">
+            <figure class="avatar avatar-xl">
+              <img src="<%= image_url('avatar/avatar-1.png') %>" alt="<%= user.email %>" class="img-fluid" data-toggle="tooltip" title data-original-title="<%= user.email %>" />
+              <% if user == current_user %>
+                <i class="avatar-presence online"></i>
+              <% else %>
+                <i class="avatar-presence busy"></i>
+              <% end %>
+            </figure>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

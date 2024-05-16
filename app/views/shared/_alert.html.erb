@@ -1,0 +1,19 @@
+<% if notice.present? || alert.present? %>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var type = '<%= alert.present? ? 'error' : 'success' %>';
+      var message = '<%= j notice || alert %>';
+
+      var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1275
+      });
+      Toast.fire({
+        icon: type,
+        title: message
+      });
+    });
+  </script>
+<% end %>

@@ -1,5 +1,7 @@
 class MakanansController < ApplicationController
-  before_action :set_makanan, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+
+  before_action :set_makanan, only: %i[show edit update destroy]
 
   # GET /makanans
   def index
@@ -7,8 +9,7 @@ class MakanansController < ApplicationController
   end
 
   # GET /makanans/1
-  def show
-  end
+  def show; end
 
   # GET /makanans/new
   def new
@@ -16,43 +17,55 @@ class MakanansController < ApplicationController
   end
 
   # GET /makanans/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /makanans
   def create
     @makanan = Makanan.new(makanan_params)
 
-    if @makanan.save
-      redirect_to makanans_url, notice: "Makanan was successfully created."
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @makanan.save
+        format.html { redirect_to makanans_url, notice: 'Makanan was successfully created.' }
+        format.json { render :show, status: :created, location: @makanan }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @makanan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /makanans/1
   def update
-    if @makanan.update(makanan_params)
-      redirect_to makanans_url, notice: "Makanan was successfully updated.", status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @makanan.update(makanan_params)
+        format.html { redirect_to makanans_url, notice: 'Makanan was successfully updated.' }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @makanan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /makanans/1
   def destroy
     @makanan.destroy!
-    redirect_to makanans_url, notice: "Makanan was successfully destroyed.", status: :see_other
+
+    respond_to do |format|
+      format.html { redirect_to makanans_url, notice: 'Makanan was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_makanan
-      @makanan = Makanan.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def makanan_params
-      params.require(:makanan).permit(:name, :halal, :price, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_makanan
+    @makanan = Makanan.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def makanan_params
+    params.require(:makanan).permit(:name, :halal, :price, :image)
+  end
 end
