@@ -1,20 +1,12 @@
-<ul class="sidebar-menu">
-    <li class="menu-header">Dashboard</li>
-    <li class="nav-item">
-    <%= link_to root_path, class: "nav-link" do %>
-      <i class="fas fa-fire"></i><span>Dashboard</span>
-    <% end %>
+<li class="menu-header">Mail</li>
+<li class="nav-item dropdown <%= 'active' if controller_name == 'makanans' || controller_name == 'tasks' %>">
+  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Data</span></a>
+  <ul class="dropdown-menu">
+    <li class="<%= active_class(makanans_path) %>">
+      <%= link_to 'Makanan', makanans_path, class: 'nav-link' %>
     </li>
-    <li class="menu-header">Mail</li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class='far fa-envelope'></i> <span>Data</span></a>
-      <ul class="dropdown-menu">
-        <li>
-          <%= link_to 'Makanan', makanans_path, class: 'nav-link', data: {turbo: false} %>
-        </li>
-        <li>
-          <%= link_to 'Task', tasks_path, class: 'nav-link', data: {turbo: false} %>
-        </li>
-      </ul>
+    <li class="<%= active_class(tasks_path) %>">
+      <%= link_to 'Task', tasks_path, class: 'nav-link' %>
     </li>
   </ul>
+</li>

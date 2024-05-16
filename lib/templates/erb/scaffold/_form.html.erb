@@ -1,7 +1,7 @@
 <%# frozen_string_literal: true %>
 <%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
 <div class="card-header">
-  <h4><%= singular_table_name %> Form</h4>
+  <h4><%= human_name %> Form</h4>
 </div>
 <div class="card-body">
   <%%= f.error_notification %>
@@ -11,7 +11,7 @@
       <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
     <%- end -%>
   </div>
-  <div class="form-actions card-footer text-right">
+  <div class="form-actions float-end py-3">
     <%%= f.button :submit, class: "btn btn-primary" %>
   </div>
 </div>

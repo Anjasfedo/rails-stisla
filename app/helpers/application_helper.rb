@@ -11,4 +11,14 @@ module ApplicationHelper
   def devise_update_profile?
     controller_name == 'registrations' && (action_name == 'edit' || action_name == 'update')
   end
+
+  def active_class(link_path)
+    current_page?(link_path) ? 'active' : ''
+  end
+
+  def load_bootstrap_css?
+    controller_name = params[:controller]
+    action_name = params[:action]
+    %w[new create edit update].include?(action_name)
+  end
 end
