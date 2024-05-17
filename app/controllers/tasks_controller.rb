@@ -23,8 +23,10 @@ class TasksController < ApplicationController
 
   # POST /tasks/import
   def import
-    if params[:file].present?
-      if import_tasks(params[:file])
+    if params[:import].present? && params[:import][:file].present?
+      file = params[:import][:file]
+
+      if import_tasks(file)
         redirect_to tasks_url, notice: 'Tasks were successfully imported.'
       else
         redirect_to tasks_url, alert: 'Some tasks could not be imported. Please check your file.'
@@ -117,11 +119,9 @@ class TasksController < ApplicationController
       next if index.zero? # Skip header row
 
       task = Task.new(title: row[:title], content: row[:content])
-      if task.valid?
-        task.save
-      else
-        return
-      end
+      return unless task.valid?
+
+      task.save
     end
   end
 end

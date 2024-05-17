@@ -1,8 +1,35 @@
-<h1>Import Tasks from Excel</h1>
-<%= form_with url: import_tasks_path, local: true, multipart: true do |form| %>
-  <div class="form-group">
-    <%= form.label :file, "Upload Excel file" %>
-    <%= form.file_field :file, class: "form-control" %>
+<% content_for :title, "Import Task" %>
+<div class="section-header">
+  <h1>Edit Task</h1>
+  <div class="section-header-breadcrumb">
+    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+    <div class="breadcrumb-item"><a href="#">Components</a></div>
+    <div class="breadcrumb-item">Import Task</div>
   </div>
-  <%= form.submit "Import", class: "btn btn-primary" %>
-<% end %>
+</div>
+<div class="section-body">
+  <h2 class="section-title">Import Task Form</h2>
+  <p class="section-lead">
+    Form for importing tasks with file upload.
+  </p>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <%= simple_form_for :import, url: import_tasks_path, html: { multipart: true } do |form| %>
+          <div class="card-header">
+            <h4>Import Task Form</h4>
+          </div>
+          <div class="card-body">
+            <%= form.input :file, as: :file, label: "Upload Excel file", input_html: { class: "form-control" } %>
+          </div>
+          <div class="card-footer text-end">
+            <%= form.submit "Import", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <%= link_to "Back to Tasks", tasks_path, class: "btn btn-outline-warning" %>
+    </div>
+  </div>
+</div>
