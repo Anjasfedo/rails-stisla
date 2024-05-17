@@ -80,3 +80,9 @@ gem "chartkick"
 gem "groupdate"
 
 gem 'cancancan'
+
+gem "roo", "~> 2.10.0"
+
+gem 'axlsx'
+
+gem 'axlsx_rails'

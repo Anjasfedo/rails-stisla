@@ -1,11 +1,16 @@
 class TasksController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_task, only: %i[show edit update destroy]
 
   # GET /tasks
   def index
     @tasks = Task.all
+
+    respond_to do |format|
+      format.html
+      format.xlsx { send_data tasks_to_xlsx, filename: "tasks-#{Date.today}.xlsx" }
+    end
   end
 
   # GET /tasks/1
@@ -67,5 +72,20 @@ class TasksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:title, :content)
+  end
+
+  def tasks_to_xlsx
+    package = Axlsx::Package.new
+    workbook = package.workbook
+
+    workbook.add_worksheet(name: 'Tasks') do |sheet|
+      sheet.add_row %w[Title Content]
+
+      @tasks.each do |task|
+        sheet.add_row [task.title, task.content]
+      end
+    end
+
+    package.to_stream.read
   end
 end
