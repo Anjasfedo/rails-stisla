@@ -3,9 +3,12 @@ class TasksController < ApplicationController
 
   before_action :set_task, only: %i[show edit update destroy]
 
+  include Pagy::Backend
+
   # GET /tasks
   def index
-    @tasks = Task.all
+    @q = Task.ransack(params[:q])
+    @pagy, @tasks = pagy(@q.result(distinct: true))
 
     respond_to do |format|
       format.html

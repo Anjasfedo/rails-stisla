@@ -1,7 +1,0 @@
-=> 
-[32m#<Task:0x00007fc9f82099e0[0m
- id: [34m[1m86[0m,
- title: [31m[1m"[0m[31mTitle[0m[31m[1m"[0m,
- content: [31m[1m"[0m[31mContent[0m[31m[1m"[0m,
- created_at: Fri, 17 May 2024 13:47:53.548313000 UTC +00:00,
- updated_at: Fri, 17 May 2024 13:47:53.548313000 UTC +00:00[32m>[0m

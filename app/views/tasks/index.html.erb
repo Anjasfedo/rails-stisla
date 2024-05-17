@@ -15,13 +15,26 @@
           <div class="card-header-form">
             <div class="input-group">
               <%= link_to "New task", new_task_path , class: "btn btn-primary" %>
-              <%= link_to 'Download Tasks as Excel', tasks_path(format: :xlsx), class: 'btn btn-success ml-3' %>
-              <%= link_to 'Import Tasks from Excel', import_form_tasks_path, class: 'btn btn-dark ml-3' %>
+              <%= link_to 'Export Tasks', tasks_path(format: :xlsx), class: 'btn btn-success ml-3' %>
+              <%= link_to 'Import Tasks', import_form_tasks_path, class: 'btn btn-dark ml-3' %>
             </div>
           </div>
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">
+            <%= search_form_for @q, url: tasks_path, method: :get, html: { class: 'form-inline my-2 mx-2' } do |f| %>
+              <div class="form-group mx-sm-1 mb-2">
+                <%= f.label :title_cont, "Title contains", class: "sr-only" %>
+                <%= f.search_field :title_cont, class: "form-control", placeholder: "Search Title" %>
+              </div>
+              <div class="form-group mx-sm-1 mb-2">
+                <%= f.label :content_cont, "Content contains", class: "sr-only" %>
+                <%= f.search_field :content_cont, class: "form-control", placeholder: "Search Content" %>
+              </div>
+              <div class="form-group mx-sm-1 mb-2">
+                <%= f.submit "Search", class: "btn btn-outline-success my-2 my-sm-0" %>
+              </div>
+            <% end %>
             <table class="table table-striped table-bordered">
               <tbody>
                 <tr>
@@ -38,6 +51,9 @@
                 <% end %>
               </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+              <%== pagy_bootstrap_nav(@pagy) %>
+            </div>
           </div>
         </div>
       </div>
