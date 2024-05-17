@@ -1,0 +1,8 @@
+<h1>Import Tasks from Excel</h1>
+<%= form_with url: import_tasks_path, local: true, multipart: true do |form| %>
+  <div class="form-group">
+    <%= form.label :file, "Upload Excel file" %>
+    <%= form.file_field :file, class: "form-control" %>
+  </div>
+  <%= form.submit "Import", class: "btn btn-primary" %>
+<% end %>

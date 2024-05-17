@@ -13,6 +13,21 @@ class TasksController < ApplicationController
     end
   end
 
+  # GET /tasks/import
+  def import_form
+    # Renders a form for file upload
+  end
+
+  # POST /tasks/import
+  def import
+    if params[:file].present?
+      import_tasks(params[:file])
+      redirect_to tasks_url, notice: 'Tasks were successfully imported.'
+    else
+      redirect_to tasks_import_form_url, alert: 'Please upload a file.'
+    end
+  end
+
   # GET /tasks/1
   def show; end
 
@@ -87,5 +102,19 @@ class TasksController < ApplicationController
     end
 
     package.to_stream.read
+  end
+
+  # Method to import tasks from an Excel file
+  def import_tasks(file)
+    spreadsheet = Roo::Spreadsheet.open(file)
+    header = spreadsheet.row(1).map(&:downcase) # Downcase all headers
+    (2..spreadsheet.last_row).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      task = Task.new(row)
+      unless task.save
+        flash[:alert] = "Row #{i} could not be imported: #{task.errors.full_messages.join(', ')}"
+        return
+      end
+    end
   end
 end
