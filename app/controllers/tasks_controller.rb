@@ -104,7 +104,7 @@ class TasksController < ApplicationController
     workbook.add_worksheet(name: 'Tasks') do |sheet|
       sheet.add_row %w[Title Content]
 
-      @tasks.each do |task|
+      Task.all.each do |task|
         sheet.add_row [task.title, task.content]
       end
     end

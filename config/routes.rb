@@ -4,8 +4,6 @@ Rails.application.routes.draw do
     collection do
       get :import_form
       post :import
-      get :index, defaults: { format: :html }
-      get :index, defaults: { format: :xlsx }
     end
   end
   resources :makanans
