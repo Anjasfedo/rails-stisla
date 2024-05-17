@@ -19,6 +19,6 @@ module ApplicationHelper
   def load_bootstrap_css?
     controller_name = params[:controller]
     action_name = params[:action]
-    %w[new create edit update].include?(action_name)
+    %w[new create edit update import_form].include?(action_name)
   end
 end

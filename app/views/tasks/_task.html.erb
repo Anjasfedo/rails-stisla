@@ -1,21 +1,15 @@
 <tr id="<%= dom_id task %>">
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= task.title %>
   </td>
-
-    
-
-    <td class="p-0 text-center">
+  <td class="p-0 text-center">
     <%= task.content %>
   </td>
-
-    
-
-<% if params[:action] == 'index' %>
+  <% if params[:action] == 'index' %>
     <td class="p-0 text-center">
       <div class="btn-group-vertical">
         <%= link_to "Show", task, class: "btn btn-outline-secondary mb-1" %>
-        <%= link_to "Edit", edit_task_url(task), class: "btn btn-outline-success mb-1" %> 
+        <%= link_to "Edit", edit_task_url(task), class: "btn btn-outline-success mb-1" %>
         <%= button_to "Destroy", task, method: :delete,  form_class: 'delete-alertbox', class: "btn btn-outline-danger mb-1" %>
       </div>
     </td>

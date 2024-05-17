@@ -1,11 +1,39 @@
 class TasksController < ApplicationController
   load_and_authorize_resource
-  
+
   before_action :set_task, only: %i[show edit update destroy]
+
+  include Pagy::Backend
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @q = Task.ransack(params[:q])
+    @pagy, @tasks = pagy(@q.result(distinct: true))
+
+    respond_to do |format|
+      format.html
+      format.xlsx { send_data tasks_to_xlsx, filename: "tasks-#{Date.today}.xlsx" }
+    end
+  end
+
+  # GET /tasks/import
+  def import_form
+    # Renders a form for file upload
+  end
+
+  # POST /tasks/import
+  def import
+    if params[:import].present? && params[:import][:file].present?
+      file = params[:import][:file]
+
+      if import_tasks(file)
+        redirect_to tasks_url, notice: 'Tasks were successfully imported.'
+      else
+        redirect_to tasks_url, alert: 'Some tasks could not be imported. Please check your file.'
+      end
+    else
+      redirect_to import_form_tasks_url, alert: 'Please upload a file.'
+    end
   end
 
   # GET /tasks/1
@@ -67,5 +95,33 @@ class TasksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:title, :content)
+  end
+
+  def tasks_to_xlsx
+    package = Axlsx::Package.new
+    workbook = package.workbook
+
+    workbook.add_worksheet(name: 'Tasks') do |sheet|
+      sheet.add_row %w[Title Content]
+
+      Task.all.each do |task|
+        sheet.add_row [task.title, task.content]
+      end
+    end
+
+    package.to_stream.read
+  end
+
+  # Method to import tasks from an Excel file
+  def import_tasks(file)
+    spreadsheet = Roo::Spreadsheet.open(file)
+    spreadsheet.each_with_index(title: 'Title', content: 'Content') do |row, index|
+      next if index.zero? # Skip header row
+
+      task = Task.new(title: row[:title], content: row[:content])
+      return unless task.valid?
+
+      task.save
+    end
   end
 end
