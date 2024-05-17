@@ -21,10 +21,13 @@ class TasksController < ApplicationController
   # POST /tasks/import
   def import
     if params[:file].present?
-      import_tasks(params[:file])
-      redirect_to tasks_url, notice: 'Tasks were successfully imported.'
+      if import_tasks(params[:file])
+        redirect_to tasks_url, notice: 'Tasks were successfully imported.'
+      else
+        redirect_to tasks_url, alert: 'Some tasks could not be imported. Please check your file.'
+      end
     else
-      redirect_to tasks_import_form_url, alert: 'Please upload a file.'
+      redirect_to import_form_tasks_url, alert: 'Please upload a file.'
     end
   end
 
@@ -107,12 +110,13 @@ class TasksController < ApplicationController
   # Method to import tasks from an Excel file
   def import_tasks(file)
     spreadsheet = Roo::Spreadsheet.open(file)
-    header = spreadsheet.row(1).map(&:downcase) # Downcase all headers
-    (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      task = Task.new(row)
-      unless task.save
-        flash[:alert] = "Row #{i} could not be imported: #{task.errors.full_messages.join(', ')}"
+    spreadsheet.each_with_index(title: 'Title', content: 'Content') do |row, index|
+      next if index.zero? # Skip header row
+
+      task = Task.new(title: row[:title], content: row[:content])
+      if task.valid?
+        task.save
+      else
         return
       end
     end

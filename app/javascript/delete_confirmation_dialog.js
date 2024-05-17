@@ -1,7 +1,9 @@
 window.addEventListener("turbo:load", () => {
   document.addEventListener("submit", (event) => {
-    if (event.target && event.target.className === "delete-alertbox") {
+    if (event.target && event.target.classList.contains("delete-alertbox")) {
       event.preventDefault();
+      const form = event.target; // Store the form that triggered the event
+
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -13,10 +15,10 @@ window.addEventListener("turbo:load", () => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            document.querySelector(".delete-alertbox").submit();
+            form.submit(); // Submit the stored form
           }
         })
-        .catch(event.preventDefault());
+        .catch(() => event.preventDefault());
     }
   });
 });
