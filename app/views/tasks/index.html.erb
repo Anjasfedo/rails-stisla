@@ -17,6 +17,7 @@
               <%= link_to "New task", new_task_path , class: "btn btn-primary" %>
               <%= link_to 'Export Tasks', tasks_path(format: :xlsx), class: 'btn btn-success ml-3' %>
               <%= link_to 'Import Tasks', import_form_tasks_path, class: 'btn btn-dark ml-3' %>
+              <%= link_to 'Download PDF', tasks_path(format: :pdf), class: 'btn btn-primary ml-3' %>
             </div>
           </div>
         </div>

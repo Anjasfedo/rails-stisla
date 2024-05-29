@@ -76,13 +76,13 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    user_name: 'b0e61edf3cf1d1',
-    password: '4d1512e4cbbf89',
-    address: 'sandbox.smtp.mailtrap.io',
-    host: 'sandbox.smtp.mailtrap.io',
-    port: '2525',
-    authentication: :login
-  }
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :user_name => 'b23b45b99d5d27',
+  :password => '4269ea83b858bf',
+  :address => 'sandbox.smtp.mailtrap.io',
+  :host => 'sandbox.smtp.mailtrap.io',
+  :port => '2525',
+  :authentication => :login
+}
 end

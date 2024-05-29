@@ -34,11 +34,13 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.seller?
-      can :read, [Makanan]
-      can :create, [Makanan]
+      can :read, :all
+      can :import_form, [Makanan]
+
       can :update, Makanan do |item|
         item.try(:halal) == false
       end
+
       can :destroy, Makanan do |item|
         item.try(:halal) == false
       end
