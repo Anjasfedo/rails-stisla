@@ -94,3 +94,5 @@ gem 'pagy'
 gem 'prawn'
 
 gem 'prawn-table'
+
+# gem 'mysql2'

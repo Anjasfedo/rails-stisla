@@ -1,6 +1,6 @@
 <% if notice.present? || alert.present? %>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('turbo:load', function() {
       var type = '<%= alert.present? ? 'error' : 'success' %>';
       var message = '<%= j notice || alert %>';
 
