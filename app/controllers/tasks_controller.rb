@@ -8,19 +8,20 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     @q = Task.ransack(params[:q])
+    @pagy, @tasks = pagy(@q.result(distinct: true))
 
     respond_to do |format|
-      format.html do
-        @pagy, @tasks = pagy(@q.result(distinct: true))
-      end
-      format.xlsx do
+      format.html
+      if params[:q].present?
+        @q = Task.ransack(params[:q])
         @tasks = @q.result(distinct: true)
-        send_data tasks_to_xlsx(@tasks), filename: "tasks-#{Date.today}.xlsx"
-      end
-      format.pdf do
-        @tasks = @q.result(distinct: true)
-        pdf = TaskPdfGenerator.new(@tasks).render
-        send_data pdf, filename: "tasks-#{Date.today}.pdf", type: 'application/pdf', disposition: 'inline'
+        format.xlsx do
+          send_data tasks_to_xlsx(@tasks), filename: "tasks-#{Date.today}.xlsx"
+        end
+        format.pdf do
+          pdf = TaskPdfGenerator.new(@tasks).render
+          send_data pdf, filename: "tasks-#{Date.today}.pdf", type: 'application/pdf', disposition: 'inline'
+        end
       end
     end
   end
