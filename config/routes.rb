@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :books
+  resources :pembelians
   devise_for :users
   resources :tasks do
     collection do

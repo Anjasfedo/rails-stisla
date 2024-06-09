@@ -13,7 +13,7 @@ class MakanansController < ApplicationController
 
   # GET /makanans/new
   def new
-    @makanan = Makanan.new
+    @makanan = Makanan.new 
   end
 
   # GET /makanans/1/edit

@@ -2,7 +2,7 @@ window.addEventListener("turbo:load", () => {
   document.addEventListener("submit", (event) => {
     if (event.target && event.target.classList.contains("delete-alertbox")) {
       event.preventDefault();
-      const form = event.target; // Store the form that triggered the event
+      const form = event.target;
 
       Swal.fire({
         title: "Are you sure?",
@@ -15,7 +15,7 @@ window.addEventListener("turbo:load", () => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            form.submit(); // Submit the stored form
+            form.submit();
           }
         })
         .catch(() => event.preventDefault());

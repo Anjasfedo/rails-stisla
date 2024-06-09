@@ -90,3 +90,9 @@ gem 'axlsx_rails'
 gem 'ransack'
 
 gem 'pagy'
+
+gem 'prawn'
+
+gem 'prawn-table'
+
+# gem 'mysql2'

@@ -30,6 +30,7 @@
           </div>
           <div class="card-body">
             <%= pie_chart Makanan.group(:halal).count, adapter: "google" %>
+            <%= pie_chart Makanan.group(:name).count, adapter: "google" %>
           </div>
         </div>
       </div>

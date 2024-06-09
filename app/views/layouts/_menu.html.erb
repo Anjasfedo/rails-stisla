@@ -12,5 +12,10 @@
         <%= link_to 'Task', tasks_path, class: 'nav-link' %>
       </li>
     <% end %>
+    <% if can?(:read, Pembelian) %>
+      <li class="<%= active_class(pembelians_path) %>">
+        <%= link_to 'Pembelian', pembelians_path, class: 'nav-link' %>
+      </li>
+    <% end %>
   </ul>
 </li>

@@ -12,7 +12,17 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xlsx { send_data tasks_to_xlsx, filename: "tasks-#{Date.today}.xlsx" }
+      if params[:q].present?
+        @q = Task.ransack(params[:q])
+        @tasks = @q.result(distinct: true)
+        format.xlsx do
+          send_data tasks_to_xlsx(@tasks), filename: "tasks-#{Date.today}.xlsx"
+        end
+        format.pdf do
+          pdf = TaskPdfGenerator.new(@tasks).render
+          send_data pdf, filename: "tasks-#{Date.today}.pdf", type: 'application/pdf', disposition: 'inline'
+        end
+      end
     end
   end
 
@@ -97,14 +107,14 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :content)
   end
 
-  def tasks_to_xlsx
+  def tasks_to_xlsx(tasks)
     package = Axlsx::Package.new
     workbook = package.workbook
 
     workbook.add_worksheet(name: 'Tasks') do |sheet|
       sheet.add_row %w[Title Content]
 
-      Task.all.each do |task|
+      tasks.each do |task|
         sheet.add_row [task.title, task.content]
       end
     end

@@ -1,0 +1,35 @@
+<tr id="<%= dom_id pembelian %>">
+    <td class="p-0 text-center">
+    <%= pembelian.kode_barang %>
+  </td>
+
+    
+
+    <td class="p-0 text-center">
+    <%= pembelian.nama_barang %>
+  </td>
+
+    
+
+    <td class="p-0 text-center">
+    <%= pembelian.jumlah_barang %>
+  </td>
+
+    
+
+    <td class="p-0 text-center">
+    <%= pembelian.status %>
+  </td>
+
+    
+
+<% if params[:action] == 'index' %>
+    <td class="p-0 text-center">
+      <div class="btn-group-vertical">
+        <%= link_to "Show", pembelian, class: "btn btn-outline-secondary mb-1" %>
+        <%= link_to "Edit", edit_pembelian_url(pembelian), class: "btn btn-outline-success mb-1" %> 
+        <%= button_to "Destroy", pembelian, method: :delete,  form_class: 'delete-alertbox', class: "btn btn-outline-danger mb-1" %>
+      </div>
+    </td>
+  <% end %>
+</tr>
