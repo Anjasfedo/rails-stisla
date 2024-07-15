@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :books
-  resources :pembelians
   devise_for :users
   resources :tasks do
     collection do
@@ -8,7 +6,6 @@ Rails.application.routes.draw do
       post :import
     end
   end
-  resources :makanans
   root 'dashboard#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

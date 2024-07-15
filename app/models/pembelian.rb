@@ -1,2 +1,0 @@
-class Pembelian < ApplicationRecord
-end

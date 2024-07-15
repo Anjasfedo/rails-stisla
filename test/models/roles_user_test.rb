@@ -1,6 +1,6 @@
 require "test_helper"
 
-class PembelianTest < ActiveSupport::TestCase
+class RolesUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

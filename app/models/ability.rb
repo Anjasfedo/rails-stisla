@@ -31,21 +31,14 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.admin?
-      can :manage, :all
-    elsif user.seller?
-      can :read, :all
-      can :import_form, [Makanan]
-
-      can :update, Makanan do |item|
-        item.try(:halal) == false
+    if user.roles.exists?
+      user.roles.each do |role|
+        role.permissions.each do |permission|
+          can permission.action.to_sym, permission.subject.constantize
+        end
       end
-
-      can :destroy, Makanan do |item|
-        item.try(:halal) == false
-      end
-    elsif user.regular?
-      can :read, :all
+    else
+      can :read, :all # Default permission for guests
     end
   end
 end
